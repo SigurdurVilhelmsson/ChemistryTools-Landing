@@ -4,7 +4,7 @@ This document provides context and guidelines for AI development assistants work
 
 ## Project Overview
 
-This is a React-based landing page and portal for AI-powered chemistry education tools developed for Kvennaskólinn í Reykjavík (a secondary school in Reykjavik, Iceland). The application serves as an entry point for various chemistry learning tools powered by Microsoft Azure OpenAI.
+This is a React-based landing page and portal for AI-powered chemistry education tools developed for Kvennaskólinn í Reykjavík (a secondary school in Reykjavik, Iceland). The application serves as an entry point for various chemistry learning tools powered by Claude from Anthropic. Authentication is handled through Microsoft Azure AD.
 
 **Primary Language:** Icelandic (all UI text, comments, and documentation should be in Icelandic)
 
@@ -25,8 +25,8 @@ This is a React-based landing page and portal for AI-powered chemistry education
 - 🚧 Admin dashboard features (UI exists, no functionality yet)
 
 ### Planned
-- 📋 Azure AD integration (to replace mock authentication)
-- 📋 Actual tool implementations
+- 📋 Azure AD B2C integration (to replace mock authentication)
+- 📋 Actual tool implementations using Claude API
 - 📋 Admin features (manage experiments, view analytics)
 
 ## Architecture
@@ -37,7 +37,8 @@ This is a React-based landing page and portal for AI-powered chemistry education
 - **Routing:** React Router v7
 - **State Management:** React Context API
 - **Styling:** CSS Modules + custom CSS
-- **Authentication:** Mock auth (localStorage) with RBAC
+- **Authentication:** Mock auth (localStorage) with RBAC (will be replaced with Azure AD B2C)
+- **AI:** Claude from Anthropic
 
 ### Key Design Patterns
 
@@ -229,8 +230,9 @@ npm run lint
 
 ### Mock Authentication
 - **Current:** localStorage-based mock auth
-- **Future:** Will be replaced with Azure AD
+- **Future:** Will be replaced with Azure AD B2C for single sign-on
 - **Implication:** When implementing features, keep auth logic modular for easy replacement
+- **Note:** Azure AD is only used for authentication, not for AI functionality
 
 ### Icelandic Language
 - All UI text must be in Icelandic
@@ -243,11 +245,12 @@ npm run lint
 - **Email domain:** @kvenno.is
 - **Subject:** Chemistry (Efnafræði)
 
-### Azure OpenAI Integration
-- Tools will use Microsoft Azure OpenAI
+### Claude API Integration
+- Tools will use Claude from Anthropic for AI functionality
 - Not yet implemented in current codebase
 - GDPR compliance is important
 - No user data should be stored
+- Authentication uses Azure AD B2C (separate from AI service)
 
 ## Git Workflow
 
@@ -262,11 +265,12 @@ npm run lint
 
 ## Future Considerations
 
-### When Implementing Azure AD
+### When Implementing Azure AD B2C
 - Replace `UserRoleContext` authentication logic
 - Keep the role system (teacher/student distinction)
-- Update `teachers.js` or migrate to Azure AD groups
+- Update `teachers.js` or migrate to Azure AD groups/roles
 - Remove localStorage dependency
+- Azure AD is only for authentication, not AI services
 
 ### When Adding New Tools
 - Follow the pattern in `ToolCard.jsx`

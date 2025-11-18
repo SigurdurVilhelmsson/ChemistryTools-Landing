@@ -4,7 +4,7 @@ Velkominn á lendingarsíðu AI-knúinna efnafræðiverkfæra fyrir Kvennaskóla
 
 ## 📋 Um verkefnið
 
-Þessi vefur er aðgangspunktur fyrir AI-knúin kennslutól sem eru þróuð til að styðja við nám og kennslu í efnafræði. Verkfærin eru hönnuð sérstaklega fyrir nemendur og kennara við Kvennaskólann og nota Microsoft Azure OpenAI þjónustu.
+Þessi vefur er aðgangspunktur fyrir AI-knúin kennslutól sem eru þróuð til að styðja við nám og kennslu í efnafræði. Verkfærin eru hönnuð sérstaklega fyrir nemendur og kennara við Kvennaskólann og nota Claude gervigreind frá Anthropic. Auðkenning er með Microsoft Azure AD.
 
 ## 🎨 Hönnunarkerfi
 
@@ -107,7 +107,7 @@ export const TEACHER_EMAILS = [
 - Hlutverk er ákvarðað út frá kennaraskrá
 - Gögn eru geymd í localStorage
 - UserRoleContext veitir aðgang að `isTeacher` og `role` upplýsingum
-- Þetta verður skipt út fyrir Azure AD auðkenning í framtíðinni
+- Þetta verður skipt út fyrir Azure AD B2C auðkenning í framtíðinni
 
 ## 📱 Responsive hönnun
 
@@ -138,8 +138,9 @@ Kennarar hafa aðgang að stjórnunarspjaldi þar sem þeir geta:
 ## 🔒 Persónuvernd
 
 - Engin gögn eru geymd
-- Azure OpenAI uppfyllir GDPR staðla
+- Claude API uppfyllir GDPR staðla
 - Aðeins @kvenno.is netföng hafa aðgang
+- Auðkenning með Azure AD (aðskilið frá AI þjónustu)
 
 ## 📞 Tengiliður
 
