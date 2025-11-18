@@ -17,31 +17,33 @@ Vefurinn fylgir hönnunarkerfi Kvennaskólans:
 
 ## 🛠 Tæknilegur grunnur
 
-- **React 18** með Vite
-- **React Router v6** fyrir síðuskipti
+- **React 19** með Vite
+- **React Router v7** fyrir síðuskipti
 - **CSS Modules** fyrir stílsetningu
-- **Mock auðkenning** (verður uppfært með Azure AD)
+- **Mock auðkenning** með RBAC (Role-Based Access Control)
+- **Context API** fyrir auðkenningarstjórnun og hlutverk notenda
 
 ## 📁 Uppbygging verkefnis
 
 ```
 src/
-├── components/          # Endurnýtanlegir íhlutir
-│   ├── Header.jsx      # Haus með leiðsögn
-│   ├── Hero.jsx        # Helgarsíða
-│   ├── ToolCard.jsx    # Spjald fyrir verkfæri
-│   └── Footer.jsx      # Fótur
-├── pages/              # Síður
-│   ├── Home.jsx        # Forsíða
-│   ├── About.jsx       # Um verkfærin
-│   ├── LabReports.jsx  # Skýrslugerð (staðgengill)
-│   └── AITutor.jsx     # AI kennari (staðgengill)
-├── styles/             # Stílskrár
-│   └── variables.css   # CSS breytur
-├── context/            # React Context
-│   └── AuthContext.jsx # Auðkenning
-├── App.jsx            # Aðalíhlutur
-└── main.jsx           # Inngangspunktur
+├── components/             # Endurnýtanlegir íhlutir
+│   ├── Header.jsx         # Haus með leiðsögn
+│   ├── Hero.jsx           # Helgarsíða
+│   ├── ToolCard.jsx       # Spjald fyrir verkfæri
+│   └── Footer.jsx         # Fótur
+├── pages/                 # Síður
+│   ├── Home.jsx           # Forsíða
+│   ├── About.jsx          # Um verkfærin
+│   ├── LabReports.jsx     # Skýrslugerð (staðgengill)
+│   ├── AITutor.jsx        # AI kennari (staðgengill)
+│   └── Admin.jsx          # Stjórnunarspjald (aðeins fyrir kennara)
+├── contexts/              # React Context
+│   └── UserRoleContext.jsx # Auðkenning og hlutverk
+├── config/                # Stillingar
+│   └── teachers.js        # Listi yfir kennara
+├── App.jsx                # Aðalíhlutur
+└── main.jsx               # Inngangspunktur
 ```
 
 ## 🚀 Uppsetning
@@ -79,12 +81,32 @@ npm run build
 
 Byggðar skrár verða í `dist/` möppunni.
 
-## 🔐 Auðkenning
+## 🔐 Auðkenning og hlutverk
 
-Núverandi útgáfa notar **mock auðkenning** í þróunarskyni:
+Núverandi útgáfa notar **mock auðkenning** með RBAC (Role-Based Access Control):
 
-- Notendur geta skráð sig inn með hvaða @kvenno.is netfangi sem er
+### Hlutverk notenda
+
+- **Kennarar:** Hafa fullan aðgang að öllum verkfærum og stjórnunarspjaldi
+- **Nemendur:** Hafa aðgang að öllum námskeiðsverkfærum
+
+### Kennaraskrá
+
+Kennarar eru skilgreindir í `src/config/teachers.js`. Til að bæta við kennara:
+
+```javascript
+export const TEACHER_EMAILS = [
+  'sigurdurev@kvenno.is',
+  // Bættu við fleiri netföngum hér
+];
+```
+
+### Tæknilegar upplýsingar
+
+- Notendur skrá sig inn með @kvenno.is netfangi
+- Hlutverk er ákvarðað út frá kennaraskrá
 - Gögn eru geymd í localStorage
+- UserRoleContext veitir aðgang að `isTeacher` og `role` upplýsingum
 - Þetta verður skipt út fyrir Azure AD auðkenning í framtíðinni
 
 ## 📱 Responsive hönnun
@@ -105,6 +127,13 @@ Gagnvirkur AI aðstoðarkennari - kemur í janúar 2026
 
 ### 3. Framtíðarverkfæri (Í þróun)
 Fleiri verkfæri í þróun
+
+### 4. Stjórnunarspjald (Aðeins kennarar)
+Kennarar hafa aðgang að stjórnunarspjaldi þar sem þeir geta:
+- Bætt við og breytt tilraunum (í framtíðinni)
+- Stjórnað aðgangi nemenda (í framtíðinni)
+- Skoðað notkunartölur (í framtíðinni)
+- Breytt stillingum (í framtíðinni)
 
 ## 🔒 Persónuvernd
 
