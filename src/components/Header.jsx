@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useUserRole } from '../contexts/UserRoleContext';
 import './Header.css';
 
 const Header = () => {
@@ -9,7 +9,7 @@ const Header = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [error, setError] = useState('');
-  const { user, login, logout, isAuthenticated } = useAuth();
+  const { authState, isAuthenticated, isTeacher, login, logout } = useUserRole();
   const location = useLocation();
 
   const toggleMenu = () => {
@@ -20,8 +20,16 @@ const Header = () => {
     e.preventDefault();
     setError('');
 
+    // Check if email ends with @kvenno.is
+    if (!email.endsWith('@kvenno.is')) {
+      setError('Aðeins netföng með endingu @kvenno.is eru leyfð');
+      return;
+    }
+
     try {
-      login(email, name);
+      const mockToken = 'mock-token-' + Date.now();
+      const userName = name || email.split('@')[0];
+      login(email, userName, mockToken);
       setShowLoginModal(false);
       setEmail('');
       setName('');
@@ -56,6 +64,24 @@ const Header = () => {
               <Link to="/about" className={`nav-link ${isActive('/about')}`} onClick={() => setIsMenuOpen(false)}>
                 Um verkfærin
               </Link>
+
+              {isAuthenticated && (
+                <>
+                  <Link to="/lab-reports" className={`nav-link ${isActive('/lab-reports')}`} onClick={() => setIsMenuOpen(false)}>
+                    Skýrslur
+                  </Link>
+                  <Link to="/ai-tutor" className={`nav-link ${isActive('/ai-tutor')}`} onClick={() => setIsMenuOpen(false)}>
+                    Aðstoðarkennari
+                  </Link>
+                </>
+              )}
+
+              {isTeacher && (
+                <Link to="/admin" className={`nav-link nav-link-teacher ${isActive('/admin')}`} onClick={() => setIsMenuOpen(false)}>
+                  Stjórnun
+                </Link>
+              )}
+
               <a href="#help" className="nav-link" onClick={() => setIsMenuOpen(false)}>
                 Hjálp
               </a>
@@ -64,7 +90,12 @@ const Header = () => {
             <div className="header-actions">
               {isAuthenticated ? (
                 <div className="user-section">
-                  <span className="user-name">Velkomin/n, {user.name}</span>
+                  <span className="user-name">
+                    Velkomin/n, {authState.name}
+                    {isTeacher && (
+                      <span className="teacher-badge">Kennari</span>
+                    )}
+                  </span>
                   <button className="btn-secondary btn-sm" onClick={handleLogout}>
                     Útskrá
                   </button>
@@ -96,13 +127,36 @@ const Header = () => {
               <Link to="/about" onClick={() => setIsMenuOpen(false)}>
                 Um verkfærin
               </Link>
+
+              {isAuthenticated && (
+                <>
+                  <Link to="/lab-reports" onClick={() => setIsMenuOpen(false)}>
+                    Skýrslur
+                  </Link>
+                  <Link to="/ai-tutor" onClick={() => setIsMenuOpen(false)}>
+                    Aðstoðarkennari
+                  </Link>
+                </>
+              )}
+
+              {isTeacher && (
+                <Link to="/admin" className="mobile-nav-teacher" onClick={() => setIsMenuOpen(false)}>
+                  Stjórnun
+                </Link>
+              )}
+
               <a href="#help" onClick={() => setIsMenuOpen(false)}>
                 Hjálp
               </a>
             </nav>
             {isAuthenticated ? (
               <div className="mobile-user">
-                <p>Velkomin/n, {user.name}</p>
+                <p>
+                  Velkomin/n, {authState.name}
+                  {isTeacher && (
+                    <span className="teacher-badge">Kennari</span>
+                  )}
+                </p>
                 <button className="btn-secondary" onClick={handleLogout}>
                   Útskrá
                 </button>

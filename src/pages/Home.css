@@ -2,6 +2,28 @@
   min-height: 100vh;
 }
 
+/* Auth Prompt */
+.auth-prompt {
+  padding: 0 0 var(--spacing-2xl) 0;
+}
+
+.auth-prompt-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+  background-color: #fff5e6;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--primary-orange);
+  text-align: center;
+}
+
+.auth-prompt-content p {
+  color: #c55113;
+  font-size: 1rem;
+  font-weight: var(--font-medium);
+  margin: 0;
+}
+
 /* Tools Section */
 .tools-section {
   padding: var(--spacing-3xl) 0;

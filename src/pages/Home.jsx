@@ -1,8 +1,10 @@
 import Hero from '../components/Hero';
 import ToolCard from '../components/ToolCard';
+import { useUserRole } from '../contexts/UserRoleContext';
 import './Home.css';
 
 const Home = () => {
+  const { isAuthenticated } = useUserRole();
   const tools = [
     {
       id: 'lab-reports',
@@ -34,6 +36,16 @@ const Home = () => {
   return (
     <div className="home">
       <Hero />
+
+      {!isAuthenticated && (
+        <div className="auth-prompt">
+          <div className="container">
+            <div className="auth-prompt-content">
+              <p>Skráðu þig inn með skólareikningnum þínum til að nota verkfærin</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       <section id="tools" className="tools-section">
         <div className="container">
