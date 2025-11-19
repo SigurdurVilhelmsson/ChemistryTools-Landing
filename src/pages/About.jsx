@@ -17,7 +17,7 @@ const About = () => {
           <p>
             Þessi verkfæri eru þróuð til að styðja við nám og kennslu í efnafræði með því að nýta
             kraft gervigreindar. Verkfærin eru hönnuð sérstaklega fyrir nemendur og kennara við
-            Kvennaskólann í Reykjavík og nota Microsoft Azure OpenAI þjónustu til að veita
+            Kvennaskólann í Reykjavík og nota Claude gervigreind frá Anthropic til að veita
             gagnlega og nákvæma endurgjöf.
           </p>
           <p>
@@ -34,8 +34,8 @@ const About = () => {
               <div className="feature-content">
                 <h3>Öruggt auðkenning</h3>
                 <p>
-                  Þú skráir þig inn með þínu @kvenno.is Microsoft 365 netfangi. Aðeins nemendur
-                  og starfsfólk skólans hafa aðgang.
+                  Þú skráir þig inn með þínu @kvenno.is netfangi í gegnum Microsoft Azure AD.
+                  Aðeins nemendur og starfsfólk skólans hafa aðgang.
                 </p>
               </div>
             </div>
@@ -43,10 +43,10 @@ const About = () => {
             <div className="feature-item">
               <div className="feature-icon">🤖</div>
               <div className="feature-content">
-                <h3>Gervigreind frá Microsoft Azure</h3>
+                <h3>Claude gervigreind frá Anthropic</h3>
                 <p>
-                  Verkfærin nota Azure OpenAI þjónustu til að greina texta og veita endurgjöf.
-                  Þetta eru sömu gervigreindarlíkön og eru notuð í ChatGPT.
+                  Verkfærin nota Claude gervigreindarlíkön frá Anthropic til að greina texta og veita endurgjöf.
+                  Claude er eitt af fremstu tungumálalíkönum heims.
                 </p>
               </div>
             </div>
@@ -114,7 +114,7 @@ const About = () => {
               gagnagrunn. Hann er aðeins notaður til að vinna úr beiðni þinni.
             </li>
             <li>
-              <strong>Azure OpenAI:</strong> Við notum Microsoft Azure OpenAI þjónustu sem uppfyllir
+              <strong>Claude API:</strong> Við notum Claude API frá Anthropic sem uppfyllir
               strangasta öryggisstaðla Evrópusambandsins (GDPR).
             </li>
             <li>
