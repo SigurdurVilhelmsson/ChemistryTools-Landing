@@ -88,7 +88,7 @@ const Header = () => {
             </nav>
 
             <div className="header-actions">
-              {isAuthenticated ? (
+              {isAuthenticated && authState.email !== 'guest@kvenno.is' ? (
                 <div className="user-section">
                   <span className="user-name">
                     Velkomin/n, {authState.name}
@@ -102,7 +102,7 @@ const Header = () => {
                 </div>
               ) : (
                 <button className="btn-primary" onClick={() => setShowLoginModal(true)}>
-                  Skrá inn með Microsoft
+                  Kennari? Skrá inn
                 </button>
               )}
             </div>
@@ -149,7 +149,7 @@ const Header = () => {
                 Hjálp
               </a>
             </nav>
-            {isAuthenticated ? (
+            {isAuthenticated && authState.email !== 'guest@kvenno.is' ? (
               <div className="mobile-user">
                 <p>
                   Velkomin/n, {authState.name}
@@ -166,7 +166,7 @@ const Header = () => {
                 setShowLoginModal(true);
                 setIsMenuOpen(false);
               }}>
-                Skrá inn með Microsoft
+                Kennari? Skrá inn
               </button>
             )}
           </div>
@@ -177,8 +177,8 @@ const Header = () => {
       {showLoginModal && (
         <div className="modal-overlay" onClick={() => setShowLoginModal(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <h2>Skrá inn</h2>
-            <p className="modal-subtitle">Notaðu þitt @kvenno.is netfang</p>
+            <h2>Kennari innskráning</h2>
+            <p className="modal-subtitle">Skráðu þig inn til að fá aðgang að stjórnborði</p>
 
             <form onSubmit={handleLogin}>
               <div className="form-group">

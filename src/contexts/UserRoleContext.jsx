@@ -7,7 +7,7 @@ export function UserRoleProvider({ children }) {
   const [authState, setAuthState] = useState(null);
   const [role, setRole] = useState(null);
 
-  // On mount, check localStorage for existing auth
+  // On mount, check localStorage for existing auth or auto-authenticate
   useEffect(() => {
     const savedAuth = localStorage.getItem('kvenno_auth');
     if (savedAuth) {
@@ -18,9 +18,26 @@ export function UserRoleProvider({ children }) {
       } catch (e) {
         console.error('Failed to parse saved auth:', e);
         localStorage.removeItem('kvenno_auth');
+        // Auto-authenticate as guest student
+        autoAuthenticateGuest();
       }
+    } else {
+      // Auto-authenticate all visitors as guest students
+      autoAuthenticateGuest();
     }
   }, []);
+
+  const autoAuthenticateGuest = () => {
+    const guestAuth = {
+      email: 'guest@kvenno.is',
+      name: 'Gestur',
+      token: 'auto-guest-token',
+      role: 'student',
+      timestamp: new Date().toISOString()
+    };
+    setAuthState(guestAuth);
+    setRole('student');
+  };
 
   const login = (email, name, token) => {
     const userRole = getUserRole(email);
