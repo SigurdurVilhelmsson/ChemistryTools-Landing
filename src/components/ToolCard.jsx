@@ -1,35 +1,25 @@
-import { Link } from 'react-router-dom';
 import { useUserRole } from '../contexts/UserRoleContext';
 import './ToolCard.css';
 
 const ToolCard = ({ tool }) => {
-  const { id, title, description, icon, path, status, releaseDate } = tool;
-  const { role, isAuthenticated } = useUserRole();
+  const { title, description, icon, externalUrl, status, releaseDate } = tool;
+  const { isAuthenticated } = useUserRole();
 
   /**
-   * Determine navigation behavior based on tool and user role
+   * Handle navigation to external tool apps
    */
-  const handleClick = (e) => {
+  const handleClick = () => {
     if (!isAuthenticated) {
-      e.preventDefault();
       alert('Vinsamlegast skráðu þig inn til að nota verkfærin');
       return;
     }
 
-    if (status !== 'available') {
-      e.preventDefault();
+    if (status !== 'available' || !externalUrl) {
       return;
     }
 
-    // For Lab Reports, navigate to external subdirectory with role indicator
-    if (id === 'lab-reports') {
-      e.preventDefault();
-      // Navigate to separate app - it will read auth from localStorage
-      const targetPath = role === 'teacher' ? '/lab-reports/teacher' : '/lab-reports/student';
-      window.location.href = targetPath;
-    }
-
-    // For future internal tools, use React Router (Link component handles this)
+    // Navigate to external app - it will read auth and role from localStorage
+    window.location.href = externalUrl;
   };
 
   const getStatusBadge = () => {
@@ -60,16 +50,16 @@ const ToolCard = ({ tool }) => {
     </>
   );
 
-  if (status === 'available' && path) {
-    return (
-      <Link to={path} className="tool-card tool-card-clickable" onClick={handleClick}>
-        <CardContent />
-      </Link>
-    );
-  }
+  const isClickable = status === 'available' && externalUrl;
 
   return (
-    <div className={`tool-card ${status !== 'available' ? 'tool-card-disabled' : ''}`}>
+    <div
+      className={`tool-card ${isClickable ? 'tool-card-clickable' : ''} ${status !== 'available' ? 'tool-card-disabled' : ''}`}
+      onClick={isClickable ? handleClick : undefined}
+      role={isClickable ? 'button' : undefined}
+      tabIndex={isClickable ? 0 : undefined}
+      onKeyPress={isClickable ? (e) => e.key === 'Enter' && handleClick() : undefined}
+    >
       <CardContent />
     </div>
   );
