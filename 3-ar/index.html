@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3. ár - Kvenno Efnafræði</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .site-header {
+            background: white;
+            border-bottom: 2px solid #f36b22;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #f36b22;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .site-logo:hover {
+            opacity: 0.8;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .header-btn {
+            background: white;
+            border: 2px solid #f36b22;
+            color: #f36b22;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .header-btn:hover {
+            background: #f36b22;
+            color: white;
+        }
+
+        /* Breadcrumbs */
+        .breadcrumbs {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .breadcrumbs a {
+            color: #f36b22;
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-title {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .page-title h1 {
+            color: #f36b22;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .tool-card {
+            background: white;
+            border: 2px solid #f36b22;
+            border-radius: 12px;
+            padding: 2rem;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(243, 107, 34, 0.3);
+            border-color: #f36b22;
+        }
+
+        .tool-card h3 {
+            color: #f36b22;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-card p {
+            color: #666;
+            flex-grow: 1;
+        }
+
+        .tool-card .status {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #999;
+            font-style: italic;
+        }
+
+        .tool-card.active .status {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .tool-card.coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+            border-style: dashed;
+        }
+
+        .tool-card.coming-soon:hover {
+            transform: none;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            margin-bottom: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid #f36b22;
+            color: #f36b22;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: #f36b22;
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .page-title h1 {
+                font-size: 2rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-content">
+            <a href="/" class="site-logo">Kvenno Efnafræði</a>
+            <div class="header-actions">
+                <a href="/admin" class="header-btn">Kennari</a>
+                <a href="/info" class="header-btn">Upplýsingar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <a href="/">Heim</a> > <span>3. ár</span>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <a href="/" class="back-button">← Til baka</a>
+
+        <!-- Page Title -->
+        <section class="page-title">
+            <h1>3. árs efnafræði</h1>
+            <p>Gagnvirk verkfæri fyrir nemendur í þriðja árs efnafræði</p>
+        </section>
+
+        <!-- Tools Grid -->
+        <div class="tools-grid">
+            <!-- Lab Reports -->
+            <a href="/3-ar/lab-reports/" class="tool-card active">
+                <h3>Tilraunaskýrslur</h3>
+                <p>Forrit fyrir nemendur til að skrifa og skila inn tilraunaskýrslum. Fáðu endurgjöf frá gervigreind og sendu til kennarans þegar tilbúið.</p>
+                <span class="status">✓ Í notkun</span>
+            </a>
+
+            <!-- AI Tutor -->
+            <a href="/3-ar/ai-tutor/" class="tool-card">
+                <h3>AI Efnafræðikennari</h3>
+                <p>Spurðu spurninga og fáðu skýringar á efnafræðihugtökum með hjálp gervigreindar. Kennarinn útskýrir hugtök og hjálpar þér að skilja efnið betur.</p>
+                <span class="status">Í þróun - Ræsing í janúar 2026</span>
+            </a>
+
+            <!-- Games -->
+            <a href="/3-ar/games/" class="tool-card">
+                <h3>Leikir og æfingar</h3>
+                <p>Skemmtilegar æfingar og leikir til að þjálfa þekkingu þína á lífræna efnafræði, rafsegulfræði og hvarfafræði.</p>
+                <span class="status">Væntanlegt</span>
+            </a>
+
+            <!-- Future Tool 1 -->
+            <a href="#" class="tool-card coming-soon">
+                <h3>Sameindagerð</h3>
+                <p>Gagnvirkur sameindagerðarforrit til að sjá þrívíð módel af sameindagerð.</p>
+                <span class="status">Í áætlun</span>
+            </a>
+
+            <!-- Future Tool 2 -->
+            <a href="#" class="tool-card coming-soon">
+                <h3>Litrófsgreining</h3>
+                <p>Lærðu að túlka litróf með gagnvirkum verkfærum.</p>
+                <span class="status">Í áætlun</span>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Kvennaskólinn í Reykjavík - Efnafræðideild</p>
+    </footer>
+</body>
+</html>
