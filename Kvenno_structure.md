@@ -190,10 +190,18 @@ Each app (Lab Reports, AI Tutor, etc.) must include:
 
 > **NOTE**: Update this section for each repo
 
-- **Repo Name**: [e.g., lab-reports-app]
-- **Deployed To**: [e.g., /1-ar/lab-reports/]
-- **Purpose**: [Brief description of what this app does]
-- **Current Status**: [In development / Deployed / Planning]
+- **Repo Name**: ChemistryTools-Landing (kvenno-landing)
+- **Deployed To**: `/` (root) and year hub pages (`/1-ar/`, `/2-ar/`, `/3-ar/`, `/val/`, `/f-bekkir/`)
+- **Purpose**: Main landing page and year-based hub navigation for kvenno.app. Provides the entry point and organizes all chemistry tools by academic year and track.
+- **Current Status**: Deployed (Static HTML)
+- **Tech Stack**: Pure HTML/CSS (no build process needed)
+- **Structure**:
+  - `index.html` - Main landing page with navigation to year hubs
+  - `1-ar/index.html` - 1st year hub with tools for 1st year chemistry
+  - `2-ar/index.html` - 2nd year hub with tools for 2nd year chemistry
+  - `3-ar/index.html` - 3rd year hub with tools for 3rd year chemistry
+  - `val/index.html` - Elective courses hub
+  - `f-bekkir/index.html` - Social sciences track hub
 
 ## 9. Deployment Notes
 

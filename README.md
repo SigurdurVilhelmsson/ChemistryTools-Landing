@@ -1,158 +1,219 @@
-# Efnafræðiverkfæri með AI - Kvennaskólinn
+# Kvenno Efnafræði - Aðalsíða og miðstöð
 
-Velkominn á lendingarsíðu AI-knúinna efnafræðiverkfæra fyrir Kvennaskólann í Reykjavík.
+Aðalsíða og leiðarkerfi fyrir AI-knúin efnafræðiverkfæri við Kvennaskólann í Reykjavík.
 
 ## 📋 Um verkefnið
 
-Þessi vefur er aðgangspunktur fyrir AI-knúin kennslutól sem eru þróuð til að styðja við nám og kennslu í efnafræði. Verkfærin eru hönnuð sérstaklega fyrir nemendur og kennara við Kvennaskólann og nota Claude gervigreind frá Anthropic. Auðkenning er með Microsoft Azure AD.
+Þetta er aðgangspunktur kvenno.app - vefsíða sem tengir saman gagnvirk kennslutól í efnafræði. Verkfærin eru skipulögð eftir áföngum og hönnuð fyrir nemendur og kennara við Kvennaskólann í Reykjavík.
+
+### Arkitektúr
+
+Verkefnið notar **áfanga-miðaða uppbyggingu** þar sem hvert ár og námsleið hefur sína eigin miðstöð:
+
+```
+kvenno.app/
+├── /                    (Aðalsíða - þetta verkefni)
+├── /1-ar/              (Miðstöð 1. árs)
+├── /2-ar/              (Miðstöð 2. árs)
+├── /3-ar/              (Miðstöð 3. árs)
+├── /val/               (Miðstöð valgerninga)
+└── /f-bekkir/          (Miðstöð félags- og hugvísindabrautar)
+```
+
+Hvert áfangasvæði inniheldur tengla á verkfæri sem eru viðeigandi fyrir það ár.
+
+## 🏗 Uppbygging verkefnis
+
+### Skráarskipan
+
+```
+ChemistryTools-Landing/
+├── index.html              # Aðalsíða með leiðsögn á áfanga
+├── 1-ar/
+│   └── index.html         # 1. árs miðstöð
+├── 2-ar/
+│   └── index.html         # 2. árs miðstöð
+├── 3-ar/
+│   └── index.html         # 3. árs miðstöð
+├── val/
+│   └── index.html         # Valgreinar miðstöð
+├── f-bekkir/
+│   └── index.html         # F-bekkir miðstöð
+├── Kvenno_structure.md    # Heildaruppbygging og hönnunarkerfi (MIKILVÆGT)
+├── CLAUDE.md              # Þróunarleiðbeiningar fyrir AI aðstoð
+└── README.md              # Þessi skrá
+```
+
+### Tæknilegur grunnur
+
+- **Uppbygging:** Statískar HTML síður
+- **Stílar:** Innbyggðir CSS-stílar í hverri síðu
+- **Hönnun:** Samræmt hönnunarkerfi á öllum síðum
+- **Deployment:** Einfaldar statískar skrár, engin build skref nauðsynleg
 
 ## 🎨 Hönnunarkerfi
 
-Vefurinn fylgir hönnunarkerfi Kvennaskólans:
+Allar síður fylgja samræmdu hönnunarkerfi sem skilgreint er í `Kvenno_structure.md`:
 
-- **Aðal litur:** #f36b22 (appelsínugulur)
-- **Aukalit:** #c55113
-- **Leturgerð:** Hind frá Google Fonts
-- **Hönnunarstíll:** Hreinn, nútímalegur með miklu hvítu rými
+### Litir
+- **Aðallitur:** `#f36b22` (appelsínugulur - vörumerki Kvennaskólans)
+- **Bakgrunnur:** Hvítur eða ljósgrár (`#f5f5f5`)
+- **Texti:** Dökk grá/svart (`#333333`)
 
-## 🛠 Tæknilegur grunnur
+### Íhlutir
 
-- **React 19** með Vite
-- **React Router v7** fyrir síðuskipti
-- **CSS Modules** fyrir stílsetningu
-- **Mock auðkenning** með RBAC (Role-Based Access Control)
-- **Context API** fyrir auðkenningarstjórnun og hlutverk notenda
+#### Haus (Header)
+Allir síður innihalda samræmdan haus með:
+- Merki/nafn síðu: "Kvenno Efnafræði" (tengist á `/`)
+- Hægri hnappar: "Kennari" og "Upplýsingar"
+- Sticky staðsetning
+- 2px botn border í appelsínugulu
 
-## 📁 Uppbygging verkefnis
-
+#### Brauðmylsnuslóð (Breadcrumbs)
+Allar undirsíður sýna staðsetningu:
 ```
-src/
-├── components/             # Endurnýtanlegir íhlutir
-│   ├── Header.jsx         # Haus með leiðsögn
-│   ├── Hero.jsx           # Helgarsíða
-│   ├── ToolCard.jsx       # Spjald fyrir verkfæri
-│   └── Footer.jsx         # Fótur
-├── pages/                 # Síður
-│   ├── Home.jsx           # Forsíða
-│   ├── About.jsx          # Um verkfærin
-│   ├── LabReports.jsx     # Skýrslugerð (staðgengill)
-│   ├── AITutor.jsx        # AI kennari (staðgengill)
-│   └── Admin.jsx          # Stjórnunarspjald (aðeins fyrir kennara)
-├── contexts/              # React Context
-│   └── UserRoleContext.jsx # Auðkenning og hlutverk
-├── config/                # Stillingar
-│   └── teachers.js        # Listi yfir kennara
-├── App.jsx                # Aðalíhlutur
-└── main.jsx               # Inngangspunktur
+Heim > 1. ár
+Heim > 2. ár > Lab Reports
 ```
 
-## 🚀 Uppsetning
+#### Hnappar og spjöld
+- Border: `2px solid #f36b22`
+- Border radius: `8px`
+- Hover: Fylling með appelsínugulu, hvítur texti
+- Smooth umskipti (transition)
 
-### Skilyrði
+## 🚀 Uppsetning og deployment
 
-- Node.js (útgáfa 18 eða nýrri)
-- npm eða yarn
+### Þróun
 
-### Uppsetning á development umhverfi
-
-1. Klóna verkefnið:
-```bash
-git clone <repository-url>
-cd ChemistryTools-Landing
-```
-
-2. Setja upp dependencies:
-```bash
-npm install
-```
-
-3. Keyra þróunarþjón:
-```bash
-npm run dev
-```
-
-4. Opna vafra og fara á `http://localhost:5173`
-
-### Byggja fyrir framleiðslu
+Engin build skref eru nauðsynleg. Opnaðu einfaldlega HTML skrárnar í vafra:
 
 ```bash
-npm run build
+# Með einfaldum HTTP þjón (ef þú vilt prófa leiðsögnina)
+python3 -m http.server 8000
+# Farðu á http://localhost:8000
 ```
 
-Byggðar skrár verða í `dist/` möppunni.
+### Deployment á framleiðsluþjón
 
-## 🔐 Auðkenning og hlutverk
+```bash
+# Afritaðu skrárnar beint í deployment möppu
+cp -r * /var/www/kvenno.app/landing/
 
-Núverandi útgáfa notar **mock auðkenning** með RBAC (Role-Based Access Control):
-
-### Hlutverk notenda
-
-- **Kennarar:** Hafa fullan aðgang að öllum verkfærum og stjórnunarspjaldi
-- **Nemendur:** Hafa aðgang að öllum námskeiðsverkfærum
-
-### Kennaraskrá
-
-Kennarar eru skilgreindir í `src/config/teachers.js`. Til að bæta við kennara:
-
-```javascript
-export const TEACHER_EMAILS = [
-  'sigurdurev@kvenno.is',
-  // Bættu við fleiri netföngum hér
-];
+# Stilltu réttindi
+sudo chown -R www-data:www-data /var/www/kvenno.app/landing
+sudo chmod -R 755 /var/www/kvenno.app/landing
 ```
 
-### Tæknilegar upplýsingar
+### Uppbygging á þjóni
 
-- Notendur skrá sig inn með @kvenno.is netfangi
-- Hlutverk er ákvarðað út frá kennaraskrá
-- Gögn eru geymd í localStorage
-- UserRoleContext veitir aðgang að `isTeacher` og `role` upplýsingum
-- Þetta verður skipt út fyrir Azure AD B2C auðkenning í framtíðinni
+```
+/var/www/kvenno.app/
+├── landing/              # Þetta verkefni
+│   ├── index.html
+│   ├── 1-ar/
+│   ├── 2-ar/
+│   └── ...
+├── lab-reports/          # Lab Reports verkfæri (annað repo)
+├── ai-tutor/             # AI Tutor verkfæri (annað repo)
+└── chemistry-games-*/    # Efnafræðileikir (aðskilin repos)
+```
 
-## 📱 Responsive hönnun
+## 📁 Verkfæri og áfangar
 
-Vefurinn er fullkomlega responsive með þremur breakpoints:
+### Verkfæri sem deilt er á milli ára
 
-- **Farsími:** < 768px
-- **Spjaldtölva:** 768px - 1024px
-- **Tölva:** > 1024px
+Eftirfarandi verkfæri eru í **aðskildum repositories** en notuð á mörgum árum:
 
-## 🧪 Tiltæk verkfæri
+- **AI Efnafræðikennari** (`ai-tutor-app`)
+  - Notað í: 1. ár, 2. ár, 3. ár
+  - Slóðir: `/1-ar/ai-tutor/`, `/2-ar/ai-tutor/`, `/3-ar/ai-tutor/`
 
-### 1. Aðstoð við skýrslugerð (Tiltækt)
-AI-knúin endurgjöf fyrir efnafræðiskýrslur
+- **Lab Reports** (`lab-reports-app`)
+  - Notað í: 2. ár, 3. ár
+  - Slóðir: `/2-ar/lab-reports/`, `/3-ar/lab-reports/`
 
-### 2. Aðstoðarkennari í efnafræði (Væntanlegt)
-Gagnvirkur AI aðstoðarkennari - kemur í janúar 2026
+### Sértæk verkfæri fyrir hvert ár
 
-### 3. Framtíðarverkfæri (Í þróun)
-Fleiri verkfæri í þróun
+- **Efnafræðileikir** - Mismunandi erfiðleikastig fyrir hvert ár:
+  - `chemistry-games-1ar` → `/1-ar/games/`
+  - `chemistry-games-2ar` → `/2-ar/games/`
+  - `chemistry-games-3ar` → `/3-ar/games/`
 
-### 4. Stjórnunarspjald (Aðeins kennarar)
-Kennarar hafa aðgang að stjórnunarspjaldi þar sem þeir geta:
-- Bætt við og breytt tilraunum (í framtíðinni)
-- Stjórnað aðgangi nemenda (í framtíðinni)
-- Skoðað notkunartölur (í framtíðinni)
-- Breytt stillingum (í framtíðinni)
+## 🔧 Hvernig á að breyta
 
-## 🔒 Persónuvernd
+### Að bæta við nýrri áfangamiðstöð
 
-- Engin gögn eru geymd
-- Claude API uppfyllir GDPR staðla
-- Aðeins @kvenno.is netföng hafa aðgang
-- Auðkenning með Azure AD (aðskilið frá AI þjónustu)
+1. Búðu til nýja möppu (t.d. `4-ar/`)
+2. Afritaðu `1-ar/index.html` sem sniðmát
+3. Breyttu titli, breadcrumbs og verkfæralista
+4. Bættu við tengli á aðalsíðunni (`index.html`)
 
-## 📞 Tengiliður
+### Að bæta við verkfæri á áfangasíðu
 
-Ef þú hefur spurningar eða rekst á vandamál:
+Breyttu viðeigandi `[ártal]/index.html`:
 
-- **Netfang:** efnafraeði@kvenno.is
-- **Skóli:** Kvennaskólinn í Reykjavík
+```html
+<a href="/1-ar/nytt-verkfaeri/" class="tool-card">
+    <h3>Nafn verkfæris</h3>
+    <p>Lýsing á verkfærinu...</p>
+    <span class="status">Staða: Tiltækt / Væntanlegt / Í áætlun</span>
+</a>
+```
+
+### Að uppfæra hönnunarkerfi
+
+1. Lestu `Kvenno_structure.md` fyrir samræmda hönnun
+2. Gerðu breytingar í CSS hluta viðeigandi HTML skrár
+3. Tryggðu samræmi á öllum síðum
+4. Uppfærðu `Kvenno_structure.md` ef nauðsynlegt
+
+## 📖 Mikilvæg skjöl
+
+### Kvenno_structure.md
+**MIKILVÆGAST** - Lýsir heildaruppbyggingu alls kvenno.app vefjarins:
+- Heildar URL skipan
+- Hönnunarkerfi og stílreglur
+- Haus og breadcrumb kröfur
+- Leiðbeiningar um að vinna með verkfæri
+- Afritaðu þessa skrá í **öll önnur repositories** fyrir kvenno.app verkfæri
+
+### CLAUDE.md
+Leiðbeiningar fyrir AI þróunaraðstoð (Claude Code). Inniheldur:
+- Nákvæmar þróunarleiðbeiningar
+- Samhengi um verkefnið
+- Best practices
+- **ATH:** Sumar upplýsingar kunna að vera úreltar - Kvenno_structure.md er aðalheimild
+
+## 🌐 Tungumál
+
+Öll viðmót eru á **íslensku**:
+- "Heim" ekki "Home"
+- "Til baka" ekki "Back"
+- "Verkfæri" ekki "Tools"
+- "Kennari" ekki "Teacher/Admin"
+
+## 🔗 Tenglar
+
+- **Vefur:** kvenno.app
+- **Skóli:** [Kvennaskólinn í Reykjavík](https://kvenno.is)
+- **Efnafræðideild:** efnafraeði@kvenno.is
+
+## 📊 Núverandi staða (Nov 2024)
+
+- ✅ Aðalsíða með áfangaleiðsögn
+- ✅ Miðstöðvar fyrir 1. ár, 2. ár, 3. ár, Val og F-bekkir
+- ✅ Samræmt hönnunarkerfi
+- ✅ Responsive hönnun fyrir farsíma og spjaldtölvur
+- 🚧 Einstök verkfæri í þróun (aðskilin repositories)
+- 📋 Áætlun: Fleiri verkfæri og eiginleikar
 
 ## 📝 License
 
-© 2025 Kvennaskólinn í Reykjavík. Allur réttur áskilinn.
+© 2024 Kvennaskólinn í Reykjavík - Efnafræðideild. Allur réttur áskilinn.
 
 ---
 
-Þróað af efnafræðikennaranum við Kvennaskólann í Reykjavík.
+**Síðast uppfært:** 2024-11-20
+**Viðhaldsaðili:** Sigurður Einarsson, efnafræðikennari
+**Útgáfa:** 2.0.0 (Endurskipulögð uppbygging)
