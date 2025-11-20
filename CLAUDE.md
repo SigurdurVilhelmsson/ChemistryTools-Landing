@@ -4,24 +4,33 @@ This document provides context and guidelines for AI development assistants work
 
 ## Project Overview
 
-This is a React-based landing page and portal for AI-powered chemistry education tools developed for Kvennaskólinn í Reykjavík (a secondary school in Reykjavik, Iceland). The application serves as an entry point for various chemistry learning tools powered by Claude from Anthropic. Authentication is handled through Microsoft Azure AD.
+This is a React-based landing page and portal for AI-powered chemistry education tools developed for Kvennaskólinn í Reykjavík (a secondary school in Reykjavik, Iceland). The application serves as a centralized entry point that links to separate chemistry learning tool applications, each in their own repository and deployment. Authentication is handled through Microsoft Azure AD and shared via localStorage.
 
 **Primary Language:** Icelandic (all UI text, comments, and documentation should be in Icelandic)
 
-## Current Status (As of 2025-11-18)
+## Repository Structure
+
+This repository contains **only the landing page**. Individual tools are in separate repositories:
+- **Landing Page:** `/home/user/repo/ChemistryTools-Landing` → deployed to `/var/www/ChemistryTools-Landing`
+- **Lab Reports:** `/home/user/repo/LabReports` → deployed to `/var/www/LabReports`
+- **AI Tutor:** `/home/user/repo/AITutor` (future) → deployed to `/var/www/AITutor`
+
+Each tool is built and deployed independently. The landing page navigates to tools via external URLs (e.g., `/LabReports/`, `/AITutor/`).
+
+## Current Status (As of 2025-11-20)
 
 ### Implemented Features
 - ✅ React 19 landing page with Vite build system
 - ✅ Role-Based Access Control (RBAC) system
-- ✅ Mock authentication with localStorage
+- ✅ Mock authentication with localStorage (shared across tools)
 - ✅ Teacher/Student role differentiation
 - ✅ Admin dashboard (teacher-only)
 - ✅ Responsive design following school's design system
-- ✅ Three tool pages (Lab Reports, AI Tutor, Future Tools)
+- ✅ External navigation to separate tool applications
 
 ### In Development
-- 🚧 Lab Reports tool (placeholder page exists, functionality not implemented)
-- 🚧 AI Tutor (coming January 2026)
+- 🚧 Lab Reports tool (separate repository, in development)
+- 🚧 AI Tutor (coming January 2026, separate repository)
 - 🚧 Admin dashboard features (UI exists, no functionality yet)
 
 ### Planned
@@ -94,17 +103,18 @@ const { isTeacher, isAuthenticated, role, login, logout } = useUserRole();
 
 #### `src/pages/Home.jsx`
 - Landing page with hero section
-- Displays tool cards
+- Displays tool cards with external navigation
 - Shows authentication prompt for unauthenticated users
+- Defines tool configurations with `externalUrl` property
+
+#### `src/pages/About.jsx`
+- About page with project information
+- Describes the tools and their purpose
 
 #### `src/pages/Admin.jsx`
 - Teacher-only dashboard
 - Auto-redirects non-teachers to home page
 - Currently shows placeholder content for future features
-
-#### `src/pages/LabReports.jsx` & `src/pages/AITutor.jsx`
-- Placeholder pages for future tools
-- Ready for implementation
 
 ### Component Files
 
@@ -116,7 +126,9 @@ const { isTeacher, isAuthenticated, role, login, logout } = useUserRole();
 #### `src/components/ToolCard.jsx`
 - Displays a tool with icon, title, description
 - Shows status badges (available, coming, planned)
-- Handles navigation and disabled states
+- Handles external navigation via `window.location.href`
+- Reads authentication state from localStorage (shared across tools)
+- Checks user authentication before allowing navigation
 
 ## Design System
 
@@ -180,9 +192,22 @@ export const TEACHER_EMAILS = [
 ```
 
 #### Adding a new tool
-1. Create new page component in `src/pages/`
-2. Add route in `src/App.jsx`
-3. Add tool card data in `src/pages/Home.jsx`
+1. Create the tool in a **separate repository** (e.g., `/home/user/repo/NewTool`)
+2. Build and deploy to `/var/www/NewTool`
+3. Add tool card data in `src/pages/Home.jsx`:
+   ```javascript
+   {
+     id: 'new-tool',
+     title: 'Titill verkfæris',
+     description: 'Lýsing á verkfærinu',
+     icon: '🔬',
+     externalUrl: '/NewTool/',  // Points to deployed app
+     status: 'available',  // or 'coming', 'planned'
+     releaseDate: 'Janúar 2026'  // Optional, for 'coming' status
+   }
+   ```
+4. The tool app should read authentication state from localStorage
+5. Note: Do NOT create internal routes in App.jsx for tools
 
 #### Protecting a route for teachers only
 ```javascript
@@ -294,6 +319,15 @@ If you encounter unclear requirements or architectural decisions:
 
 ## Recent Changes
 
+### 2025-11-20: Refactored to Landing-Page-Only Architecture
+- **BREAKING:** Removed internal tool pages (LabReports.jsx, AITutor.jsx)
+- Updated ToolCard to use external navigation via `window.location.href`
+- Changed tool configuration to use `externalUrl` instead of `path`
+- Removed tool routes from App.jsx (only keeps landing, about, admin)
+- Cleaned up unused files (ToolPage.css, AuthContext.jsx)
+- Updated documentation to reflect multi-repository architecture
+- Tools are now separate repositories deployed to `/var/www/*`
+
 ### 2025-11-18: RBAC System Added
 - Implemented Role-Based Access Control
 - Added `UserRoleContext` for auth and role management
@@ -304,6 +338,6 @@ If you encounter unclear requirements or architectural decisions:
 
 ---
 
-**Last Updated:** 2025-11-18
+**Last Updated:** 2025-11-20
 **Project Version:** 0.0.0 (pre-release)
 **Status:** Active Development

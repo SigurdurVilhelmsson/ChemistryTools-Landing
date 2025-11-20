@@ -11,7 +11,7 @@ const Home = () => {
       title: 'Aðstoð við skýrslugerð',
       description: 'AI-knúin endurgjöf fyrir efnafræðiskýrslur',
       icon: '🧪',
-      path: '/lab-reports',
+      externalUrl: '/LabReports/',
       status: 'available'
     },
     {
@@ -19,7 +19,7 @@ const Home = () => {
       title: 'Aðstoðarkennari í efnafræði',
       description: 'Gagnvirkur aðstoðarkennari í efnafræði byggður á gervigreind',
       icon: '🤖',
-      path: '/ai-tutor',
+      externalUrl: '/AITutor/',
       status: 'coming',
       releaseDate: 'Janúar 2026'
     },
@@ -28,7 +28,7 @@ const Home = () => {
       title: 'Framtíðarverkfæri',
       description: 'Fleiri verkfæri í þróun',
       icon: '⚗️',
-      path: '',
+      externalUrl: '',
       status: 'planned'
     }
   ];
