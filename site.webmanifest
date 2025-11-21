@@ -1,6 +1,6 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "Efnafræðivefur Kvennó",
+  "short_name": "Kvenno.app",
   "icons": [
     {
       "src": "/media/web-app-manifest-192x192.png",
