@@ -5,8 +5,8 @@ This document provides context and guidelines for AI development assistants work
 ## IMPORTANT: Read This First
 
 **Before starting any work on kvenno.app projects:**
-1. **Always read `Kvenno_structure.md` first** - This is the master document defining the entire site structure, design system, and navigation patterns
-2. This CLAUDE.md file provides repo-specific context but `Kvenno_structure.md` is the authoritative source for design decisions
+1. **Always read `KVENNO-STRUCTURE.md` first** - This is the master document defining the entire site structure, design system, and navigation patterns
+2. This CLAUDE.md file provides repo-specific context but `KVENNO-STRUCTURE.md` is the authoritative source for design decisions
 
 ## Project Overview
 
@@ -35,27 +35,34 @@ ChemistryTools-Landing/
 │   └── index.html         # Elective courses hub
 ├── f-bekkir/
 │   └── index.html         # Social sciences track hub
-├── Kvenno_structure.md    # MASTER DOCUMENT - Site structure & design system
+├── media/                 # Favicon and brand assets
+│   ├── favicon.ico
+│   ├── favicon.svg
+│   └── ...
+├── KVENNO-STRUCTURE.md    # MASTER DOCUMENT - Site structure & design system
 ├── CLAUDE.md              # This file - AI assistant guide
-└── README.md              # Project documentation
+├── DEPLOYMENT.md          # Deployment instructions and procedures
+├── README.md              # Project documentation
+└── styles.css             # Global styles for landing page
 ```
 
 ### Deployment Locations
 
 **This Repository (Development → Production):**
-- `/home/user/ChemistryTools-Landing` → `/var/www/kvenno.app/landing/`
+- `/home/user/ChemistryTools-Landing` → `/var/www/kvenno.app/` (root level)
+  - Deploys: `index.html`, `styles.css`, `media/`, and all hub pages (`1-ar/index.html`, etc.)
 
 **Other Tool Repositories:**
-- Lab Reports: `/home/user/LabReports` → `/var/www/kvenno.app/lab-reports/`
-- AI Tutor: `/home/user/AITutor` → `/var/www/kvenno.app/ai-tutor/` (future)
-- Chemistry Games: Separate repos per year
+- Lab Reports: `/home/user/LabReports` → `/var/www/kvenno.app/2-ar/lab-reports/` and `/var/www/kvenno.app/3-ar/lab-reports/`
+- AI Tutor: `/home/user/icelandic-chemistry-ai-tutor` → `/var/www/kvenno.app/1-ar/ai-tutor/`, `/var/www/kvenno.app/2-ar/ai-tutor/`, `/var/www/kvenno.app/3-ar/ai-tutor/`
+- Chemistry Games: `/home/user/ChemistryGames` → `/var/www/kvenno.app/[year]/games/` (separate builds per year)
 
 ### Web Paths
-- **Landing Page:** `/` (this repo)
-- **Year Hubs:** `/1-ar/`, `/2-ar/`, `/3-ar/`, `/val/`, `/f-bekkir/` (this repo)
-- **Tools:** `/1-ar/ai-tutor/`, `/2-ar/lab-reports/`, etc. (separate repos)
+- **Landing Page:** `/` (this repo - `index.html`)
+- **Year Hubs:** `/1-ar/`, `/2-ar/`, `/3-ar/`, `/val/`, `/f-bekkir/` (this repo - hub `index.html` files)
+- **Tools:** `/1-ar/ai-tutor/`, `/2-ar/lab-reports/`, `/1-ar/games/`, etc. (separate repos - see KVENNO-STRUCTURE.md section 1)
 
-## Current Status (As of 2024-11-20)
+## Current Status (As of 2025-11-22)
 
 ### Implemented Features
 - ✅ Static HTML landing page and year hub structure
@@ -64,16 +71,19 @@ ChemistryTools-Landing/
 - ✅ Breadcrumb navigation on hub pages
 - ✅ Responsive design following school's design system
 - ✅ Tool cards with status indicators (available, coming, planned)
+- ✅ Favicon and brand assets in media folder
+- ✅ Global styles in styles.css
+- ✅ Comprehensive documentation (KVENNO-STRUCTURE.md, DEPLOYMENT.md)
 
 ### In Development (Separate Repositories)
-- 🚧 Lab Reports tool (`lab-reports-app`)
-- 🚧 AI Tutor (`ai-tutor-app`, coming January 2026)
-- 🚧 Chemistry Games (separate repos per year)
+- 🚧 Lab Reports tool (`LabReports` repo) - deployed to 2nd and 3rd year
+- 🚧 AI Tutor (`icelandic-chemistry-ai-tutor` repo) - deployed to 1st, 2nd, and 3rd year
+- 🚧 Chemistry Games (`ChemistryGames` repo) - separate games per year
 
 ### Planned
-- 📋 Admin features (separate admin tool or integrated into tools)
-- 📋 Authentication system (Azure AD B2C)
-- 📋 Additional chemistry tools
+- 📋 Additional chemistry tools as needed
+- 📋 Elective course tools (`/val/`)
+- 📋 Social sciences track tools (`/f-bekkir/`)
 
 ## Architecture & Tech Stack
 
@@ -90,7 +100,7 @@ ChemistryTools-Landing/
    - Logo: "Kvenno Efnafræði" (links to `/`)
    - Right buttons: "Kennari" and "Upplýsingar"
    - Sticky positioning
-   - Defined in `Kvenno_structure.md`
+   - Defined in `KVENNO-STRUCTURE.md`
 
 2. **Breadcrumb Navigation**
    - Format: `Heim > [Section] > [Page]`
@@ -151,7 +161,7 @@ box-shadow: 0 2px 4px rgba(0,0,0,0.1);
    - Variable names and code comments can be in English
    - Examples: "Heim" not "Home", "Til baka" not "Back"
 
-2. **Follow the design system from Kvenno_structure.md**
+2. **Follow the design system from KVENNO-STRUCTURE.md**
    - Use #f36b22 for primary color
    - Use consistent button/card styling
    - Include header on all pages
@@ -179,6 +189,8 @@ box-shadow: 0 2px 4px rgba(0,0,0,0.1);
    - Page heading
    - Tool cards (add relevant tools)
 4. Add navigation tile on main `index.html`
+5. Update KVENNO-STRUCTURE.md to reflect the new hub
+6. Test locally before deployment (see DEPLOYMENT.md)
 
 #### Adding a new tool to a year hub
 
@@ -244,44 +256,61 @@ npx serve .
 
 ### Standard Deployment Process
 
+**See DEPLOYMENT.md for comprehensive deployment instructions.**
+
+Quick reference:
+
 ```bash
-# On production server:
-cd /var/www/kvenno.app/landing
+# From local machine (WSL)
+cd /home/user/ChemistryTools-Landing
+scp -r * siggi@server:/tmp/landing-deploy/
 
-# Pull latest changes (if using git on server)
-git pull origin main
+# SSH to server
+ssh siggi@server
 
-# Or copy files directly
-# From local: scp -r * user@server:/var/www/kvenno.app/landing/
-
-# Set permissions
-sudo chown -R www-data:www-data /var/www/kvenno.app/landing
-sudo chmod -R 755 /var/www/kvenno.app/landing
+# Deploy to production
+sudo cp -r /tmp/landing-deploy/* /var/www/kvenno.app/
+sudo chown -R www-data:www-data /var/www/kvenno.app/
+sudo chmod -R 755 /var/www/kvenno.app/
+rm -rf /tmp/landing-deploy/
 ```
 
 ### Deployment Checklist
 
-- [ ] Test all pages locally
+- [ ] Test all pages locally (python3 -m http.server 8000)
 - [ ] Verify all links work
-- [ ] Check Icelandic characters display correctly
-- [ ] Test on mobile and desktop sizes
-- [ ] Verify breadcrumbs are correct
+- [ ] Check Icelandic characters display correctly (UTF-8)
+- [ ] Test on mobile and desktop sizes (< 768px and > 768px)
+- [ ] Verify breadcrumbs are correct on all hub pages
+- [ ] Ensure header is consistent across all pages
+- [ ] Check favicon displays correctly
 - [ ] Copy files to server
-- [ ] Set correct permissions
-- [ ] Test live site
+- [ ] Set correct permissions (755 for dirs, 644 for files)
+- [ ] Test live site at https://kvenno.app/
+- [ ] Verify all hub pages load (1-ar, 2-ar, 3-ar, val, f-bekkir)
 
 ## Tool Deployment Architecture
 
-Each tool is developed and deployed independently:
+Each tool is developed and deployed independently. **See KVENNO-STRUCTURE.md Section 1 for complete mapping.**
 
 ```
-Repository              → Deployment                  → Web Path
-────────────────────────────────────────────────────────────────
-kvenno-landing          → /var/www/kvenno.app/landing → /
-lab-reports-app         → /var/www/kvenno.app/lab-reports → /2-ar/lab-reports/
-ai-tutor-app            → /var/www/kvenno.app/ai-tutor → /1-ar/ai-tutor/
-chemistry-games-1ar     → /var/www/kvenno.app/games-1ar → /1-ar/games/
+Repository                    → Deployment                        → Web Path
+──────────────────────────────────────────────────────────────────────────────
+ChemistryTools-Landing        → /var/www/kvenno.app/              → /
+LabReports (build 1)          → /var/www/kvenno.app/2-ar/lab-reports/ → /2-ar/lab-reports/
+LabReports (build 2)          → /var/www/kvenno.app/3-ar/lab-reports/ → /3-ar/lab-reports/
+icelandic-chemistry-ai-tutor  → /var/www/kvenno.app/1-ar/ai-tutor/ → /1-ar/ai-tutor/
+  (build 1)
+icelandic-chemistry-ai-tutor  → /var/www/kvenno.app/2-ar/ai-tutor/ → /2-ar/ai-tutor/
+  (build 2)
+icelandic-chemistry-ai-tutor  → /var/www/kvenno.app/3-ar/ai-tutor/ → /3-ar/ai-tutor/
+  (build 3)
+ChemistryGames/1-ar           → /var/www/kvenno.app/1-ar/games/   → /1-ar/games/
+ChemistryGames/2-ar           → /var/www/kvenno.app/2-ar/games/   → /2-ar/games/
+ChemistryGames/3-ar           → /var/www/kvenno.app/3-ar/games/   → /3-ar/games/
 ```
+
+**IMPORTANT**: Shared apps (Lab Reports, AI Tutor) require separate builds for each deployment path. See KVENNO-STRUCTURE.md Section 1 for details on multi-path builds.
 
 ### Adding a New Tool
 
@@ -307,11 +336,16 @@ chemistry-games-1ar     → /var/www/kvenno.app/games-1ar → /1-ar/games/
 - **Email domain:** @kvenno.is
 - **Subject:** Chemistry (Efnafræði)
 
-### Authentication (Future)
-- Will be implemented with Azure AD B2C
-- Currently no authentication on landing pages
-- Individual tools may implement their own auth
-- Keep auth logic modular for future integration
+### Authentication
+
+**This repository (ChemistryTools-Landing) does not require authentication** - all pages are open access.
+
+Individual tools handle their own authentication:
+- **Lab Reports**: Requires Azure AD authentication (see LabReports repo)
+- **AI Tutor**: Requires Azure AD authentication (see icelandic-chemistry-ai-tutor repo)
+- **Chemistry Games**: Open access (no authentication)
+
+For detailed authentication implementation, see KVENNO-STRUCTURE.md Section 2.
 
 ### AI Integration (In Tools)
 - Tools will use Claude from Anthropic for AI functionality
@@ -358,24 +392,27 @@ chemistry-games-1ar     → /var/www/kvenno.app/games-1ar → /1-ar/games/
    - Keep core functionality working without JS
    - Consider adding small animations
 
-### When Adding Authentication
-
-- Landing pages may not need auth
-- Individual tools will handle their own authentication
-- Consider shared auth state via localStorage or cookies
-- Azure AD B2C will be the central auth provider
 
 ## Questions or Issues?
 
 If you encounter unclear requirements or architectural decisions:
-1. **Check `Kvenno_structure.md` first** - it's the authoritative source
-2. Check existing patterns in similar pages
-3. Prioritize consistency with current implementation
-4. Keep the Icelandic language requirement in mind
-5. Maintain simplicity - static HTML is intentional
-6. Ask the user for clarification if needed
+1. **Check `KVENNO-STRUCTURE.md` first** - it's the authoritative source for all design and architecture decisions
+2. Check `DEPLOYMENT.md` for deployment-specific questions
+3. Review existing patterns in similar pages for consistency
+4. Prioritize consistency with current implementation
+5. Keep the Icelandic language requirement in mind (all UI text must be in Icelandic)
+6. Maintain simplicity - static HTML is intentional (no build process)
+7. Ask the user for clarification if needed
 
 ## Recent Changes
+
+### 2025-11-22: Documentation and Standards Update
+- Updated `KVENNO-STRUCTURE.md` Section 8 with ChemistryTools-Landing details
+- Created comprehensive `DEPLOYMENT.md` with deployment procedures
+- Updated `README.md` to reference KVENNO-STRUCTURE.md and DEPLOYMENT.md
+- Updated `CLAUDE.md` to match current architecture and documentation
+- Verified repository structure matches standards
+- Clarified deployment paths and multi-build requirements for shared apps
 
 ### 2024-11-20: Complete Restructure to Static HTML
 - **BREAKING:** Removed React-based SPA architecture
@@ -383,8 +420,8 @@ If you encounter unclear requirements or architectural decisions:
 - Implemented year-based hub structure (1-ar, 2-ar, 3-ar, val, f-bekkir)
 - Added consistent header component on all pages
 - Added breadcrumb navigation on hub pages
-- Implemented design system from `Kvenno_structure.md`
-- Created `Kvenno_structure.md` as master design document
+- Implemented design system from `KVENNO-STRUCTURE.md`
+- Created `KVENNO-STRUCTURE.md` as master design document
 - Removed all React dependencies, build tools, and complex infrastructure
 
 ### Previous History (Pre-2024-11-20)
@@ -395,8 +432,8 @@ If you encounter unclear requirements or architectural decisions:
 
 ---
 
-**Last Updated:** 2024-11-20
-**Project Version:** 2.0.0 (Static HTML rewrite)
+**Last Updated:** 2025-11-22
+**Project Version:** 2.1.0 (Documentation update)
 **Status:** Production
 
 ---
@@ -404,20 +441,25 @@ If you encounter unclear requirements or architectural decisions:
 ## Quick Reference for AI Assistants
 
 **Working on this repo:**
-1. Read `Kvenno_structure.md` for design system
-2. Use Icelandic for all UI text
-3. Maintain consistency across all HTML files
-4. Test locally before deployment
-5. Remember: Simple static HTML is intentional
+1. **ALWAYS read `KVENNO-STRUCTURE.md` first** for design system and architecture
+2. Check `DEPLOYMENT.md` for deployment procedures
+3. Use Icelandic for all UI text (Heim, Til baka, Verkfæri, etc.)
+4. Maintain consistency across all HTML files
+5. Test locally before deployment (python3 -m http.server 8000)
+6. Remember: Simple static HTML is intentional (no build process)
+7. This repo deploys to root `/var/www/kvenno.app/`, not a subdirectory
 
 **Adding features:**
-- Copy existing patterns from current pages
-- Use #f36b22 for primary color
-- Include header and breadcrumbs
-- Keep responsive design in mind
-- Update all relevant pages if making global changes
+- Copy existing patterns from current pages for consistency
+- Use `#f36b22` for primary color (Kvennaskólinn brand)
+- Include header component on all pages
+- Add breadcrumbs on all sub-pages
+- Keep responsive design in mind (< 768px mobile, > 768px desktop)
+- Update all relevant pages if making global changes (header, styles, etc.)
+- Update `KVENNO-STRUCTURE.md` if making architectural changes
+- Copy updated `KVENNO-STRUCTURE.md` to all other kvenno.app repos
 
-**Deployment:**
-- No build process needed
-- Copy files directly to `/var/www/kvenno.app/landing/`
-- Set permissions: `chmod 755`, `chown www-data:www-data`
+**File structure:**
+- Root: `index.html`, `styles.css`, `media/`
+- Hub pages: `[year]/index.html` (1-ar, 2-ar, 3-ar, val, f-bekkir)
+- Tools deployed separately from other repos

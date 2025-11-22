@@ -39,9 +39,11 @@ ChemistryTools-Landing/
 │   └── index.html         # Valgreinar miðstöð
 ├── f-bekkir/
 │   └── index.html         # F-bekkir miðstöð
-├── Kvenno_structure.md    # Heildaruppbygging og hönnunarkerfi (MIKILVÆGT)
+├── KVENNO-STRUCTURE.md    # Heildaruppbygging og hönnunarkerfi (MIKILVÆGT)
 ├── CLAUDE.md              # Þróunarleiðbeiningar fyrir AI aðstoð
-└── README.md              # Þessi skrá
+├── DEPLOYMENT.md          # Leiðbeiningar um uppsetningu
+├── README.md              # Þessi skrá
+└── media/                 # Favicon og mynd efni
 ```
 
 ### Tæknilegur grunnur
@@ -53,7 +55,7 @@ ChemistryTools-Landing/
 
 ## 🎨 Hönnunarkerfi
 
-Allar síður fylgja samræmdu hönnunarkerfi sem skilgreint er í `Kvenno_structure.md`:
+Allar síður fylgja samræmdu hönnunarkerfi sem skilgreint er í `KVENNO-STRUCTURE.md`:
 
 ### Litir
 - **Aðallitur:** `#f36b22` (appelsínugulur - vörumerki Kvennaskólans)
@@ -96,27 +98,43 @@ python3 -m http.server 8000
 
 ### Deployment á framleiðsluþjón
 
-```bash
-# Afritaðu skrárnar beint í deployment möppu
-cp -r * /var/www/kvenno.app/landing/
+Sjá nákvæmar leiðbeiningar í `DEPLOYMENT.md`
 
-# Stilltu réttindi
-sudo chown -R www-data:www-data /var/www/kvenno.app/landing
-sudo chmod -R 755 /var/www/kvenno.app/landing
+```bash
+# Grunnferli: Afritaðu skrárnar beint
+scp -r * siggi@server:/tmp/landing-deploy/
+ssh siggi@server
+sudo cp -r /tmp/landing-deploy/* /var/www/kvenno.app/
+sudo chown -R www-data:www-data /var/www/kvenno.app/
+sudo chmod -R 755 /var/www/kvenno.app/
+rm -rf /tmp/landing-deploy/
 ```
 
 ### Uppbygging á þjóni
 
 ```
 /var/www/kvenno.app/
-├── landing/              # Þetta verkefni
-│   ├── index.html
-│   ├── 1-ar/
-│   ├── 2-ar/
-│   └── ...
-├── lab-reports/          # Lab Reports verkfæri (annað repo)
-├── ai-tutor/             # AI Tutor verkfæri (annað repo)
-└── chemistry-games-*/    # Efnafræðileikir (aðskilin repos)
+├── index.html            # Aðalsíða (þetta verkefni)
+├── styles.css            # Stílar (þetta verkefni)
+├── media/                # Mynd efni (þetta verkefni)
+├── 1-ar/
+│   ├── index.html       # Miðstöð (þetta verkefni)
+│   ├── games/           # Leikir (ChemistryGames repo)
+│   └── ai-tutor/        # AI Tutor (ai-tutor repo)
+├── 2-ar/
+│   ├── index.html       # Miðstöð (þetta verkefni)
+│   ├── games/           # Leikir (ChemistryGames repo)
+│   ├── lab-reports/     # Lab Reports (LabReports repo)
+│   └── ai-tutor/        # AI Tutor (ai-tutor repo)
+├── 3-ar/
+│   ├── index.html       # Miðstöð (þetta verkefni)
+│   ├── games/           # Leikir (ChemistryGames repo)
+│   ├── lab-reports/     # Lab Reports (LabReports repo)
+│   └── ai-tutor/        # AI Tutor (ai-tutor repo)
+├── val/
+│   └── index.html       # Miðstöð (þetta verkefni)
+└── f-bekkir/
+    └── index.html       # Miðstöð (þetta verkefni)
 ```
 
 ## 📁 Verkfæri og áfangar
@@ -163,27 +181,39 @@ Breyttu viðeigandi `[ártal]/index.html`:
 
 ### Að uppfæra hönnunarkerfi
 
-1. Lestu `Kvenno_structure.md` fyrir samræmda hönnun
+1. Lestu `KVENNO-STRUCTURE.md` fyrir samræmda hönnun
 2. Gerðu breytingar í CSS hluta viðeigandi HTML skrár
 3. Tryggðu samræmi á öllum síðum
-4. Uppfærðu `Kvenno_structure.md` ef nauðsynlegt
+4. Uppfærðu `KVENNO-STRUCTURE.md` ef nauðsynlegt
+5. Afritaðu uppfærðu `KVENNO-STRUCTURE.md` í öll önnur kvenno.app repositories
 
 ## 📖 Mikilvæg skjöl
 
-### Kvenno_structure.md
+### KVENNO-STRUCTURE.md
 **MIKILVÆGAST** - Lýsir heildaruppbyggingu alls kvenno.app vefjarins:
-- Heildar URL skipan
+- Heildar URL skipan og vegleiðsla
 - Hönnunarkerfi og stílreglur
 - Haus og breadcrumb kröfur
+- Authentication og aðgangsstýring
+- Deployment aðferðir fyrir shared apps
 - Leiðbeiningar um að vinna með verkfæri
-- Afritaðu þessa skrá í **öll önnur repositories** fyrir kvenno.app verkfæri
+- **Afritaðu þessa skrá í öll önnur repositories** fyrir kvenno.app verkfæri
+
+### DEPLOYMENT.md
+Ítarlegar leiðbeiningar um deployment:
+- Pre-deployment checklist
+- Deployment aðferðir (SCP, Git, Rsync)
+- Post-deployment verification
+- Rollback procedures
+- Algengar villur og lausnir
 
 ### CLAUDE.md
 Leiðbeiningar fyrir AI þróunaraðstoð (Claude Code). Inniheldur:
 - Nákvæmar þróunarleiðbeiningar
 - Samhengi um verkefnið
+- Repository structure
 - Best practices
-- **ATH:** Sumar upplýsingar kunna að vera úreltar - Kvenno_structure.md er aðalheimild
+- **ATH:** KVENNO-STRUCTURE.md er aðalheimild fyrir hönnunarkerfi
 
 ## 🌐 Tungumál
 
@@ -214,6 +244,6 @@ Leiðbeiningar fyrir AI þróunaraðstoð (Claude Code). Inniheldur:
 
 ---
 
-**Síðast uppfært:** 2024-11-20
+**Síðast uppfært:** 2025-11-22
 **Viðhaldsaðili:** Sigurður Einarsson, efnafræðikennari
-**Útgáfa:** 2.0.0 (Endurskipulögð uppbygging)
+**Útgáfa:** 2.1.0 (Uppfærð skjölun)

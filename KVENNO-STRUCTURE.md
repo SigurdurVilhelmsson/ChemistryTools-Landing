@@ -384,12 +384,39 @@ Each app (Lab Reports, AI Tutor, etc.) must include:
 
 ## 8. This App's Details
 
-> **NOTE**: Update this section for each repo
+> **NOTE**: This section is specific to the ChemistryTools-Landing repository
 
-- **Repo Name**: [e.g., lab-reports-app]
-- **Deployed To**: [e.g., /1-ar/lab-reports/]
-- **Purpose**: [Brief description of what this app does]
-- **Current Status**: [In development / Deployed / Planning]
+- **Repo Name**: ChemistryTools-Landing
+- **Deployed To**: `/` (root) and all hub pages (`/1-ar/`, `/2-ar/`, `/3-ar/`, `/val/`, `/f-bekkir/`)
+- **Purpose**: Main landing page and navigation hub for kvenno.app. Provides year-based navigation to all chemistry education tools. This is a static HTML site serving as the entry point and organizational structure for the entire kvenno.app platform.
+- **Current Status**: Deployed and in active use
+- **Technology**: Static HTML with embedded CSS - no build process required
+- **Authentication**: None required (open access for all users)
+- **Language**: Icelandic (all UI text)
+- **Key Features**:
+  - Main landing page with year navigation tiles
+  - Hub pages for each year (1st, 2nd, 3rd) and track (electives, social sciences)
+  - Tool cards linking to individual applications
+  - Consistent header component across all pages
+  - Breadcrumb navigation on hub pages
+  - Responsive design for mobile and desktop
+- **Deployment Path**: Direct copy to `/var/www/kvenno.app/`
+- **Repository Structure**:
+  ```
+  ChemistryTools-Landing/
+  ├── index.html              # Main landing page
+  ├── styles.css              # Global styles for landing page
+  ├── 1-ar/index.html        # 1st year hub
+  ├── 2-ar/index.html        # 2nd year hub
+  ├── 3-ar/index.html        # 3rd year hub
+  ├── val/index.html         # Electives hub
+  ├── f-bekkir/index.html    # Social sciences hub
+  ├── media/                 # Favicon and brand assets
+  ├── KVENNO-STRUCTURE.md    # This file (master documentation)
+  ├── CLAUDE.md              # AI development guide
+  ├── README.md              # Project overview
+  └── DEPLOYMENT.md          # Deployment instructions
+  ```
 
 ## 9. Deployment Notes
 
