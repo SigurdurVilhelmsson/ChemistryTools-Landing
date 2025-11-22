@@ -49,9 +49,21 @@ ChemistryTools-Landing/
 ### Tæknilegur grunnur
 
 - **Uppbygging:** Statískar HTML síður
-- **Stílar:** Innbyggðir CSS-stílar í hverri síðu
-- **Hönnun:** Samræmt hönnunarkerfi á öllum síðum
+- **Stílar:** Global CSS (`styles.css`) með innbyggðum stílum
+- **Hönnun:** Samræmt hönnunarkerfi á öllum síðum samkvæmt KVENNO-STRUCTURE.md
 - **Deployment:** Einfaldar statískar skrár, engin build skref nauðsynleg
+- **Staðlar:** Fullkomlega samræmt við KVENNO-STRUCTURE.md hönnunarkerfi og skipulag
+
+### ✅ Staðlasamræmi
+
+Þetta repository fylgir öllum stöðlum sem skilgreindir eru í `KVENNO-STRUCTURE.md`:
+
+- ✅ **Hönnunarkerfi**: Allir litir, stílar og íhlutir samkvæmt stöðlum
+- ✅ **Header komponent**: Samræmdur haus á öllum síðum með réttum hnöppum
+- ✅ **Breadcrumbs**: Rétt brauðmylsnuslóð á öllum undirsíðum
+- ✅ **Íslenska**: Öll viðmót á íslensku
+- ✅ **Responsive**: Virkar fullkomlega á öllum skjástærðum
+- ✅ **Aðgengi**: Semantísk HTML og góð uppbygging
 
 ## 🎨 Hönnunarkerfi
 
@@ -229,12 +241,14 @@ Leiðbeiningar fyrir AI þróunaraðstoð (Claude Code). Inniheldur:
 - **Skóli:** [Kvennaskólinn í Reykjavík](https://kvenno.is)
 - **Efnafræðideild:** efnafraeði@kvenno.is
 
-## 📊 Núverandi staða (Nov 2024)
+## 📊 Núverandi staða (Nóv 2025)
 
 - ✅ Aðalsíða með áfangaleiðsögn
 - ✅ Miðstöðvar fyrir 1. ár, 2. ár, 3. ár, Val og F-bekkir
-- ✅ Samræmt hönnunarkerfi
+- ✅ Samræmt hönnunarkerfi samkvæmt KVENNO-STRUCTURE.md
 - ✅ Responsive hönnun fyrir farsíma og spjaldtölvur
+- ✅ Fullkomlega samræmt við KVENNO-STRUCTURE.md staðla
+- ✅ Í framleiðslu og virkt á kvenno.app
 - 🚧 Einstök verkfæri í þróun (aðskilin repositories)
 - 📋 Áætlun: Fleiri verkfæri og eiginleikar
 

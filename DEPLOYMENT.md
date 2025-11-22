@@ -5,9 +5,11 @@ This document provides detailed instructions for deploying the ChemistryTools-La
 ## Overview
 
 **Repository**: ChemistryTools-Landing
-**Deployment Target**: `/var/www/kvenno.app/`
+**Deployment Target**: `/var/www/kvenno.app/` (root level)
 **Technology**: Static HTML/CSS (no build process required)
 **Access**: Open access (no authentication required)
+**Standards Conformance**: ✅ Fully conformant with KVENNO-STRUCTURE.md
+**Production Status**: ✅ Deployed and active on kvenno.app
 
 ## Pre-Deployment Checklist
 
@@ -22,6 +24,32 @@ Before deploying, ensure:
 - [ ] All tool links point to correct paths
 - [ ] Favicon and media files are present
 - [ ] Design follows KVENNO-STRUCTURE.md standards (primary color #f36b22)
+
+### KVENNO-STRUCTURE.md Conformance Verification
+
+**Current Status**: ✅ This repository is fully conformant with all KVENNO-STRUCTURE.md standards
+
+Verify conformance before deployment:
+
+- [ ] **Section 4 - Design System**: All colors, typography, button/tile styling match
+  - Primary color: `#f36b22`
+  - Border radius: 8px for buttons, 12px for cards
+  - Max width: 1200px
+  - Responsive breakpoint: 768px
+
+- [ ] **Section 3 - Header Component**: Present on all pages with correct structure
+  - Site logo: "Efnafræðivefur Kvennó" linking to `/`
+  - Right buttons: "Kennarar" and "Upplýsingar"
+  - Sticky positioning with bottom border
+
+- [ ] **Section 4 - Navigation & Breadcrumbs**: Correct on all sub-pages
+  - Format: `Heim > [Section]`
+  - "Heim" links to `/`
+
+- [ ] **Section 11 - Icelandic Language**: All UI text in Icelandic
+  - "Heim" not "Home"
+  - "Til baka" not "Back"
+  - "Kennari" not "Teacher/Admin"
 
 ## Local Testing
 
@@ -272,9 +300,21 @@ sudo find /var/www/kvenno.app/ -type f -exec chmod 644 {} \;
 
 ## Related Documentation
 
-- **KVENNO-STRUCTURE.md**: Master design system and site structure
-- **CLAUDE.md**: Development guidelines for AI assistants
-- **README.md**: Project overview and quick start
+### Primary References
+
+- **KVENNO-STRUCTURE.md** ⭐ **MOST IMPORTANT**: Master document defining complete site structure, design system, navigation patterns, authentication, and deployment architecture for all kvenno.app repositories. **Always read this first** when working on kvenno.app projects.
+
+### Supporting Documentation
+
+- **CLAUDE.md**: Development guidelines and context for AI assistants working on this repository
+- **README.md**: Project overview, quick start guide, and repository-specific information
+
+### Documentation Hierarchy
+
+1. **KVENNO-STRUCTURE.md** - Authoritative source for all design and architecture decisions
+2. **DEPLOYMENT.md** (this file) - Deployment-specific procedures and checklists
+3. **CLAUDE.md** - Development workflow and AI assistant context
+4. **README.md** - User-facing documentation and overview
 
 ## Emergency Contacts
 
