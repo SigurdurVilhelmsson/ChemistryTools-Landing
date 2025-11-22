@@ -789,10 +789,17 @@ Each app (Lab Reports, AI Tutor, etc.) must include:
 
 > **NOTE**: Update this section for each repo
 
-- **Repo Name**: [e.g., lab-reports-app]
-- **Deployed To**: [e.g., /1-ar/lab-reports/]
-- **Purpose**: [Brief description of what this app does]
-- **Current Status**: [In development / Deployed / Planning]
+- **Repo Name**: ChemistryTools-Landing
+- **Deployed To**: `/var/www/kvenno.app/` (root level)
+- **Purpose**: Main landing page and navigation hub for kvenno.app. Provides year-based navigation to all chemistry tools and maintains consistent header/design system across the site.
+- **Current Status**: Deployed and in production
+- **Technology**: Static HTML + CSS (no build process required)
+- **Contains**:
+  - Landing page (`/`)
+  - Year hub pages (`/1-ar/`, `/2-ar/`, `/3-ar/`)
+  - Track hub pages (`/val/`, `/f-bekkir/`)
+  - Global stylesheet (`styles.css`)
+  - Brand assets (`media/` folder)
 
 ## 9. Deployment Notes
 
