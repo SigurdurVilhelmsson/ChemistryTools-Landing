@@ -1,4 +1,4 @@
-{
+  "scripts": {
   "check:status": "node scripts/check-status.mjs",
   "check:security": "pnpm audit && echo '✅ Security check complete'",
   "check:quality": "pnpm type-check && pnpm lint && pnpm format:check",
