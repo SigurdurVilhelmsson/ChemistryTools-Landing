@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gagnvirk verkfæri fyrir fyrsta árs efnafræði við Kvennaskólann. AI Efnafræðikennari, leikir og æfingar, reiknitæki og gagnvirkt lotukerfið.">
     <title>1. ár - Kvenno Efnafræði</title>
     <link rel="icon" type="image/png" href="/media/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/media/favicon.svg" />
@@ -12,6 +13,9 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+    <!-- Skip Navigation for Accessibility -->
+    <a href="#main-content" class="skip-link">Fara beint í efni</a>
+
     <!-- Header -->
     <header class="site-header">
         <div class="header-content">
@@ -24,13 +28,13 @@
     </header>
 
     <!-- Breadcrumbs -->
-    <nav class="breadcrumbs">
-        <a href="/">Heim</a> > <span>1. ár</span>
+    <nav class="breadcrumbs" aria-label="Brauðmolar">
+        <a href="/">Heim</a> > <span aria-current="page">1. ár</span>
     </nav>
 
     <!-- Main Content -->
-    <main class="container">
-        <a href="/" class="back-button">← Til baka</a>
+    <main id="main-content" class="container">
+        <a href="/" class="back-button" aria-label="Fara til baka á heimasíðu">← Til baka</a>
 
         <!-- Page Title -->
         <section class="page-title">
@@ -55,18 +59,18 @@
             </a>
 
             <!-- Future Tool 1 -->
-            <a href="#" class="tool-card coming-soon">
+            <div class="tool-card coming-soon" role="article" aria-disabled="true">
                 <h3>Reiknitæki</h3>
                 <p>Útreikningar og umbreytingar fyrir algeng efnafræðiverkefni.</p>
                 <span class="status">Í áætlun</span>
-            </a>
+            </div>
 
             <!-- Future Tool 2 -->
-            <a href="#" class="tool-card coming-soon">
+            <div class="tool-card coming-soon" role="article" aria-disabled="true">
                 <h3>Lotukerfið</h3>
                 <p>Gagnvirkt lotukerfið með upplýsingum um öll frumefni.</p>
                 <span class="status">Í áætlun</span>
-            </a>
+            </div>
         </div>
     </main>
 

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gagnvirk verkfæri fyrir valgreinar í efnafræði við Kvennaskólann. Sérhæfð efni og rannsóknarverkefni fyrir áhugasama nemendur.">
     <title>Valgreinar - Kvenno Efnafræði</title>
     <link rel="icon" type="image/png" href="/media/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/media/favicon.svg" />
@@ -12,6 +13,9 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+    <!-- Skip Navigation for Accessibility -->
+    <a href="#main-content" class="skip-link">Fara beint í efni</a>
+
     <!-- Header -->
     <header class="site-header">
         <div class="header-content">
@@ -24,13 +28,13 @@
     </header>
 
     <!-- Breadcrumbs -->
-    <nav class="breadcrumbs">
-        <a href="/">Heim</a> > <span>Valgreinar</span>
+    <nav class="breadcrumbs" aria-label="Brauðmolar">
+        <a href="/">Heim</a> > <span aria-current="page">Valgreinar</span>
     </nav>
 
     <!-- Main Content -->
-    <main class="container">
-        <a href="/" class="back-button">← Til baka</a>
+    <main id="main-content" class="container">
+        <a href="/" class="back-button" aria-label="Fara til baka á heimasíðu">← Til baka</a>
 
         <!-- Page Title -->
         <section class="page-title">
@@ -38,32 +42,15 @@
             <p>Gagnvirk verkfæri fyrir valgreinar í efnafræði</p>
         </section>
 
-        <!-- Empty State (or future tools) -->
+        <!-- Empty State -->
         <div class="empty-state">
             <h2>Væntanlegt</h2>
             <p>
-                Verkfæri fyrir valgreinar í efnafræði eru í áætlun. 
-                Hafðu samband við kennara þinn ef þú hefur tillögur að verkfærum 
+                Verkfæri fyrir valgreinar í efnafræði eru í áætlun.
+                Hafðu samband við kennara þinn ef þú hefur tillögur að verkfærum
                 sem gætu hjálpað þér í námi.
             </p>
         </div>
-
-        <!-- Uncomment when tools are available -->
-        <!--
-        <div class="tools-grid">
-            <a href="/val/advanced-topics/" class="tool-card coming-soon">
-                <h3>Sérhæfð efni</h3>
-                <p>Dýpri umfjöllun um efnafræðileg efni fyrir áhugasama nemendur.</p>
-                <span class="status">Í áætlun</span>
-            </a>
-
-            <a href="/val/research-projects/" class="tool-card coming-soon">
-                <h3>Rannsóknarverkefni</h3>
-                <p>Stuðningur og verkfæri fyrir sjálfstæð rannsóknarverkefni.</p>
-                <span class="status">Í áætlun</span>
-            </a>
-        </div>
-        -->
     </main>
 
     <!-- Footer -->

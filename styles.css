@@ -1,6 +1,26 @@
 /* Kvenno Efnafræði - Main Stylesheet */
 
 /* ===================================
+   Accessibility - Skip Link
+   =================================== */
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #f36b22;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    z-index: 1000;
+    border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* ===================================
    Base Styles
    =================================== */
 
