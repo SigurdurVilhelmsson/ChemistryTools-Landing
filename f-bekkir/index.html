@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gagnvirk verkfæri fyrir efnafræði í félags- og hugvísindabraut við Kvennaskólann. Hagnýt efnafræði, efnafræði og samfélag.">
     <title>F-bekkir - Kvenno Efnafræði</title>
     <link rel="icon" type="image/png" href="/media/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/media/favicon.svg" />
@@ -12,6 +13,9 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+    <!-- Skip Navigation for Accessibility -->
+    <a href="#main-content" class="skip-link">Fara beint í efni</a>
+
     <!-- Header -->
     <header class="site-header">
         <div class="header-content">
@@ -24,13 +28,13 @@
     </header>
 
     <!-- Breadcrumbs -->
-    <nav class="breadcrumbs">
-        <a href="/">Heim</a> > <span>F-bekkir</span>
+    <nav class="breadcrumbs" aria-label="Brauðmolar">
+        <a href="/">Heim</a> > <span aria-current="page">F-bekkir</span>
     </nav>
 
     <!-- Main Content -->
-    <main class="container">
-        <a href="/" class="back-button">← Til baka</a>
+    <main id="main-content" class="container">
+        <a href="/" class="back-button" aria-label="Fara til baka á heimasíðu">← Til baka</a>
 
         <!-- Page Title -->
         <section class="page-title">
@@ -38,39 +42,16 @@
             <p>Gagnvirk verkfæri fyrir nemendur í F-bekk</p>
         </section>
 
-        <!-- Empty State (or future tools) -->
+        <!-- Empty State -->
         <div class="empty-state">
             <h2>Væntanlegt</h2>
             <p>
-                Verkfæri fyrir efnafræði í félags- og hugvísindabraut eru í áætlun. 
-                Þessi verkfæri munu einblína á hagnýta efnafræði og tengsl hennar 
-                við daglegt líf og samfélag. Hafðu samband við kennara þinn ef 
+                Verkfæri fyrir efnafræði í félags- og hugvísindabraut eru í áætlun.
+                Þessi verkfæri munu einblína á hagnýta efnafræði og tengsl hennar
+                við daglegt líf og samfélag. Hafðu samband við kennara þinn ef
                 þú hefur tillögur að verkfærum sem gætu hjálpað þér í námi.
             </p>
         </div>
-
-        <!-- Uncomment when tools are available -->
-        <!--
-        <div class="tools-grid">
-            <a href="/f-bekkir/practical-chemistry/" class="tool-card coming-soon">
-                <h3>Hagnýt efnafræði</h3>
-                <p>Efnafræði í daglegu lífi - matur, hreinlætisvörur, umhverfismál.</p>
-                <span class="status">Í áætlun</span>
-            </a>
-
-            <a href="/f-bekkir/society-chemistry/" class="tool-card coming-soon">
-                <h3>Efnafræði og samfélag</h3>
-                <p>Tengsl efnafræði við heilsu, umhverfi og tækniþróun.</p>
-                <span class="status">Í áætlun</span>
-            </a>
-
-            <a href="/f-bekkir/experiments/" class="tool-card coming-soon">
-                <h3>Einfaldar tilraunir</h3>
-                <p>Skemmtilegar og öruggar tilraunir sem hægt er að gera heima.</p>
-                <span class="status">Í áætlun</span>
-            </a>
-        </div>
-        -->
     </main>
 
     <!-- Footer -->
